@@ -30,14 +30,35 @@ table {
 
 /* CSS Reset end */
 
+.chat-heading{
+    text-align: center;
+    margin-top: 1vh;
+}
+
 .chat-box{
     height: 100vh;
     width: 90%;
     margin: auto;
+    margin-top: 2vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
+}
+
+.messages{
+    width: 50%;
+    margin-top: 1.5vh;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 3vh;
+}
+
+.message{
+    border: 0.1rem solid black;
+    padding: 0.3rem;
+    border-radius: 0.3rem 0.3rem 0 0.3rem;
 }
 
 .inputarea{
