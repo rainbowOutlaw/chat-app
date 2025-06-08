@@ -63,6 +63,10 @@ table {
     border-radius: 0.3rem 0.3rem 0 0.3rem;
 }
 
+.message.left{
+    align-self: flex-start;
+}
+
 .inputarea{
     display: flex;
     gap: 0.8rem;
