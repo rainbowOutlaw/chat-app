@@ -13,6 +13,7 @@ function renderMessages(){
     inputMsg.value = "";
     inputMsg.focus();
     messages.innerHTML = msgs.map(msg => `<div class="message">${msg}</div>`).join('');
+    messages.scrollTop = messages.scrollHeight;
 }
 
 
