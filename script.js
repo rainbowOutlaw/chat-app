@@ -23,7 +23,7 @@ function renderMessages(){
         if(msg.user === 'Me'){
             currMsg = `<div class="message right">${msg.msgText}</div>`;
         }else{
-            currMsg = `<div class="message left">${msg.user}: ${msg.msgText}</div>`;
+            currMsg = `<div class="message left">${msg.user}: ${msg.msgText}(${msg.time})</div>`;
         }
         return currMsg;
     }).join('');
