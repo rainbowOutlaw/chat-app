@@ -3,21 +3,30 @@ const inputMsg = document.querySelector('.input-msg');
 const sendbtn = document.querySelector('.send-btn');
 const userSelector = document.querySelector('#userSelector');
 
-const msgs = [];
 
 function renderMessages(){
     const text = inputMsg.value.trim();
     const selectedUser = userSelector.value;
     if(text !== ''){
-        // msgs.push(text);
-        msgs.push({
+        const newMsg = {
             user: selectedUser,
             msgText: text,
             time: new Date().toLocaleTimeString(),
-        })
+        };
+        // msgs.push(text);
+        let msgs = JSON.parse(localStorage.getItem('msgs'));
+        if(msgs){
+            msgs.push(newMsg)
+            
+        }else{
+            msgs = [];
+            msgs.push(newMsg);
+        }
+        localStorage.setItem('msgs', JSON.stringify(msgs));
     }
     inputMsg.value = "";
     inputMsg.focus();
+    const msgs = JSON.parse(localStorage.getItem('msgs'));
     messages.innerHTML = msgs.map(msg => {
         let currMsg;
         if(msg.user === 'Me'){
@@ -28,6 +37,11 @@ function renderMessages(){
         return currMsg;
     }).join('');
     messages.scrollTop = messages.scrollHeight;
+}
+
+const storedData = localStorage.getItem('msgs');
+if(storedData){
+    renderMessages();
 }
 
 
