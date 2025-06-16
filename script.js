@@ -4,25 +4,32 @@ const sendbtn = document.querySelector('.send-btn');
 const userSelector = document.querySelector('#userSelector');
 
 
+
+function addMsg(text, currUser){
+    const newMsg = {
+        user: currUser,
+        msgText: text,
+        time: new Date().toLocaleTimeString(),
+    };
+    let msgs = JSON.parse(localStorage.getItem('msgs'));
+    if(msgs){
+        msgs.push(newMsg)
+        
+    }else{
+        msgs = [];
+        msgs.push(newMsg);
+    }
+    localStorage.setItem('msgs', JSON.stringify(msgs));
+}
+
 function renderMessages(){
     const text = inputMsg.value.trim();
     const selectedUser = userSelector.value;
     if(text !== ''){
-        const newMsg = {
-            user: selectedUser,
-            msgText: text,
-            time: new Date().toLocaleTimeString(),
-        };
-        // msgs.push(text);
-        let msgs = JSON.parse(localStorage.getItem('msgs'));
-        if(msgs){
-            msgs.push(newMsg)
-            
-        }else{
-            msgs = [];
-            msgs.push(newMsg);
+        addMsg(text, selectedUser);
+        if(selectedUser === 'Me'){
+            generateRandomMsg();
         }
-        localStorage.setItem('msgs', JSON.stringify(msgs));
     }
     inputMsg.value = "";
     inputMsg.focus();
@@ -44,6 +51,14 @@ if(storedData){
     renderMessages();
 }
 
+//Reply with random message to all users sending messages
+function generateRandomMsg(){
+    const randomMsgs = ['Hi', 'How are you ?', 'How was your day ?', 'When are you coming home ?', 'Did you have your breakfast yet ?'];
+    const allUsers = ['Subhendu', 'Aparajita'];
+    const randomMsgIndex = Math.floor(Math.random() * 5);
+    const randomUserIndex = Math.floor(Math.random() * 2);
+    addMsg(randomMsgs[randomMsgIndex], allUsers[randomUserIndex]);
+}
 
 inputMsg.addEventListener('keydown', (event)=>{
     
