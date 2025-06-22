@@ -5,11 +5,31 @@ const userSelector = document.querySelector('#userSelector');
 
 
 
+
+setInterval(() => {
+    let msgs = JSON.parse(localStorage.getItem('msgs'));
+    if(msgs){ 
+        const latestMsg = msgs[msgs.length - 1];
+        const timeElapsed = Date.now() - latestMsg.timestamp;
+        if(timeElapsed >= (2 * 60 * 1000)){
+            //TODO 
+            // CLEAR ALL MSGS
+            msgs.length = 0;
+            localStorage.setItem('msgs', JSON.stringify(msgs));
+            renderMessages();
+        }
+    }
+}, (1 * 60 * 1000))
+    
+
+
+
 function addMsg(text, currUser){
     const newMsg = {
         user: currUser,
         msgText: text,
         time: new Date().toLocaleTimeString(),
+        timestamp: Date.now()
     };
     let msgs = JSON.parse(localStorage.getItem('msgs'));
     if(msgs){
